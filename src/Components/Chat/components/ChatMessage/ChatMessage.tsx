@@ -10,17 +10,23 @@ interface Props {
   message: TMessage;
 }
 
-const ChatMessage: React.FC<Props> = ({ message }) => {
-  const isMe = useMemo(() => message?.author === 'me', [message?.author]);
+const ChatMessage: React.FC<Props> = ({ message: chatMessage }) => {
+  const { author, message, timestamp } = chatMessage;
+  const isMe = useMemo(() => author === 'me', [author]);
+  const msgDate = useMemo(() => (timestamp ? format(new Date(timestamp), 'd MMM yyyy HH:mm') : null), [timestamp]);
 
   return (
-    <div className={cx('chat__message', isMe ? 'right' : 'left')}>
-      {!isMe && <div className="chat__message__author">{message.author}</div>}
-      <div className="chat__message__text">{message.message}</div>
-      {message?.timestamp && (
-        <div className="chat__message__date">{format(new Date(message?.timestamp), 'd MMM yyyy HH:mm')}</div>
+    <li className={cx('chat__message', isMe ? 'right' : 'left')}>
+      {!isMe && <div className="chat__message__author">{author}</div>}
+      <div className="chat__message__text">{message}</div>
+      {msgDate && (
+        <div className="chat__message__date">
+          <time dateTime={msgDate} title={msgDate}>
+            {msgDate}
+          </time>
+        </div>
       )}
-    </div>
+    </li>
   );
 };
 

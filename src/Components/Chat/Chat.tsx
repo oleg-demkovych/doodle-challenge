@@ -20,7 +20,7 @@ const Chat: React.FC<IProps> = ({ messages }) => {
   );
 
   return (
-    <div className="chat">
+    <div className="chat" role="log">
       <ChatMessages messages={messages} />
       <ChatFooter onMessageSend={handleMessageSend} />
     </div>

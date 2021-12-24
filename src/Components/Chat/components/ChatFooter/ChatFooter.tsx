@@ -28,15 +28,17 @@ const ChatFooter: React.FC<IProps> = ({ onMessageSend }) => {
     <footer className="chat__footer">
       <form onSubmit={handleFormSubmit} className="chat__footer__form">
         <input
+          type="text"
           placeholder="Message"
           name="message"
           onChange={onInputChange}
           value={inputValue}
           autoFocus
           autoComplete="off"
+          aria-labelledby="sendButton"
         />
 
-        <button type="submit" aria-label="send" disabled={isSubmitDisabled}>
+        <button id="sendButton" type="submit" aria-label="Send message" disabled={isSubmitDisabled}>
           Send
         </button>
       </form>

@@ -19,12 +19,12 @@ const ChatMessages: React.FC<Props> = ({ messages }) => {
   useEffect(scrollToElement, [scrollToElement, messages]);
 
   return (
-    <div className="chat__messages">
+    <ul className="chat__messages" aria-live="assertive">
       {messages.map((msg, key) => (
         <ChatMessage message={msg} key={msg?.id || msg?.timestamp || key} />
       ))}
       <div ref={messagesEndRef} />
-    </div>
+    </ul>
   );
 };
 
